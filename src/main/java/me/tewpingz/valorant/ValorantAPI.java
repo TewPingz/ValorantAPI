@@ -11,28 +11,28 @@ import java.io.IOException;
 public class ValorantAPI {
 
     private static final Valorant valorantInstance = new Valorant();
-    private static final String latestVersion = "release-01.04-shipping-8-456954";
+    private static final String latestVersion = "release-01.05-shipping-15-460559";
 
     public static ValAuthentication login(String username, String password) throws IOException {
         valorantInstance.resetExecutor();
         return valorantInstance.auth(username, password);
     }
 
-    public static JsonObject getStore(ValAuthentication valAuthentication) throws IOException {
+    public static JsonObject getStore(ValAuthentication valAuthentication, ValRegion valRegion) throws IOException {
         ValHeader authHeader = new ValHeader(HttpHeaders.AUTHORIZATION, "Bearer " + valAuthentication.getToken());
         ValHeader enHeader = new ValHeader("X-Riot-Entitlements-JWT", valAuthentication.getEntertainmentToken());
-        return valorantInstance.get("https://pd.na.a.pvp.net/store/v2/storefront/" + valAuthentication.getUniqueId(), authHeader, enHeader).getAsJsonObject();
+        return valorantInstance.get(valRegion.getUrl() + "/store/v2/storefront/" + valAuthentication.getUniqueId(), authHeader, enHeader).getAsJsonObject();
     }
 
-    public static JsonObject getIds(ValAuthentication valAuthentication) throws IOException {
-        return getIds(valAuthentication, latestVersion);
+    public static JsonObject getIds(ValAuthentication valAuthentication, ValRegion valRegion) throws IOException {
+        return getIds(valAuthentication, valRegion, latestVersion);
     }
 
-    public static JsonObject getIds(ValAuthentication valAuthentication, String version) throws IOException {
+    public static JsonObject getIds(ValAuthentication valAuthentication, ValRegion valRegion, String version) throws IOException {
         ValHeader authHeader = new ValHeader(HttpHeaders.AUTHORIZATION, "Bearer " + valAuthentication.getToken());
         ValHeader enHeader = new ValHeader("X-Riot-Entitlements-JWT", valAuthentication.getEntertainmentToken());
         ValHeader verHeader = new ValHeader("X-Riot-ClientVersion", version);
-        return valorantInstance.get("https://shared.na.a.pvp.net/content-service/v2/content", authHeader, enHeader, verHeader).getAsJsonObject();
+        return valorantInstance.get(valRegion.getUrl().replace("pd", "shared") + "/content-service/v2/content", authHeader, enHeader, verHeader).getAsJsonObject();
     }
 
     public static JsonObject getBalance(ValAuthentication valAuthentication, ValRegion valRegion) throws IOException {

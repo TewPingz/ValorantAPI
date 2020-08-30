@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum  ValRegion {
 
-    NA("https://pd.na.a.pvp.net/"),
-    EU("https://pd.eu.a.pvp.net/"),
-    AP("https://pd.ap.a.pvp.net/");
+    NA("https://pd.na.a.pvp.net"),
+    EU("https://pd.eu.a.pvp.net"),
+    AP("https://pd.ap.a.pvp.net");
 
     private final String url;
 
