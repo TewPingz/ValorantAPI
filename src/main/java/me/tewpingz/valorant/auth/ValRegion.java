@@ -11,6 +11,7 @@ public enum  ValRegion {
     EU("https://pd.eu.a.pvp.net"),
     AP("https://pd.ap.a.pvp.net");
 
+    /* The endpoint for the region */
     private final String url;
 
 }
