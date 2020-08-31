@@ -3,7 +3,6 @@ package me.tewpingz.valorant;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import lombok.Getter;
 import me.tewpingz.valorant.auth.ValAuthentication;
 import me.tewpingz.valorant.auth.ValHeader;
 import org.apache.http.HttpHeaders;
@@ -55,13 +54,12 @@ class Valorant {
         String[] parts = uri.replace("https://beta.playvalorant.com/opt_in#", "").split("&");
         String token = parts[0].replace("access_token=", "").replace("\"", "");
 
-        ValHeader[] headers = new ValHeader[2];
-        headers[0] = new ValHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+        ValHeader authHeader = new ValHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token);
 
-        JsonObject entitlementResponse = this.post("https://entitlements.auth.riotgames.com/api/token/v1", "{}", headers).getAsJsonObject();
+        JsonObject entitlementResponse = this.post("https://entitlements.auth.riotgames.com/api/token/v1", "{}", authHeader).getAsJsonObject();
         String entitlementToken = entitlementResponse.get("entitlements_token").getAsString();
 
-        JsonObject userResponse = this.post("https://auth.riotgames.com/userinfo", "{}", headers).getAsJsonObject();
+        JsonObject userResponse = this.post("https://auth.riotgames.com/userinfo", "{}", authHeader).getAsJsonObject();
         String userId = userResponse.get("sub").getAsString();
 
         return new ValAuthentication(userId, token, entitlementToken);
