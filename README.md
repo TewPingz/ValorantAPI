@@ -24,12 +24,14 @@ If you find an issue you can submit it [here](https://github.com/TewPingz/Valora
 
 1. Compile by following the steps above.
 2. Use the following in your desired project.
-3.     <dependency>
-           <groupId>me.tewpingz.valorant</groupId>
-           <artifactId>ValorantAPI</artifactId>
-           <version>1.0</version>
-           <scope>compile</scope>
-       </dependency>
+  ```java     
+        <dependency>
+            <groupId>me.tewpingz.valorant</groupId>
+            <artifactId>ValorantAPI</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+   ```
 
 ## Contributing
 

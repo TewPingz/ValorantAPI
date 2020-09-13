@@ -11,7 +11,6 @@ import java.io.IOException;
 public class ValorantAPI {
 
     private static final Valorant valorantInstance = new Valorant();
-    private static final String latestVersion = "release-01.05-shipping-15-460559";
 
     /**
      * Authenticate yourself to access the api with your login and password
@@ -40,21 +39,7 @@ public class ValorantAPI {
         ValHeader enHeader = new ValHeader("X-Riot-Entitlements-JWT", valAuthentication.getEntertainmentToken());
         return valorantInstance.get(valRegion.getUrl() + "/store/v2/storefront/" + valAuthentication.getUniqueId(), authHeader, enHeader).getAsJsonObject();
     }
-
-    /**
-     * Fetches the item ids so you can convert the uniqueIds of items to names.
-     * Region isn't important here so it can be any.
-     * Uses the latest version.
-     *
-     * @param valAuthentication the valorant authentication object you receive when executing ValorantAPI#login
-     * @param valRegion the region the account is located in for the correct information.
-     * @return a JsonObject containing all of the ids.
-     * @throws IOException if the request gets invalidated or you get rate limited.
-     */
-    public static JsonObject getIds(ValAuthentication valAuthentication, ValRegion valRegion) throws IOException {
-        return getIds(valAuthentication, valRegion, latestVersion);
-    }
-
+    
     /**
      * Fetches the item ids so you can convert the uniqueIds of items to names.
      * Region isn't important here so it can be any.
