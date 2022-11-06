@@ -1,3 +1,6 @@
+# Archived
+No longer intersed in keeping up with this, busy with other things
+
 ## ValorantAPI
 
 This ValorantAPI that will allow you to access your in-game shop, match history, balance and more. 
